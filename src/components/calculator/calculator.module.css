@@ -1,6 +1,7 @@
 .container {
   height: 400px;
   width: 400px;
-  border-radius: 30px;
+  border-radius: 20px;
+  border-bottom-right-radius: 30%;
   background: var(--white);
 }
