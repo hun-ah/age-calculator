@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  gap: 10px;
+  font-weight: 800;
+  font-style: italic;
+  font-size: 80px;
+}
+
+.text {
+  color: var(--off-black);
+}
+
+.number {
+  min-width: 70px;
+  color: var(--purple);
+}
+
+@media screen and (max-width: 630px) {
+  .container {
+    font-size: 60px;
+  }
+}
+
+@media screen and (max-width: 499px) {
+  .container {
+    font-size: 50px;
+  }
+}
