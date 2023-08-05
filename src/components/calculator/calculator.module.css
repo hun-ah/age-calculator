@@ -1,7 +1,68 @@
 .container {
-  height: 400px;
-  width: 400px;
+  width: 770px;
+  padding: 56px 50px;
+  margin: 50px;
   border-radius: 20px;
-  border-bottom-right-radius: 30%;
+  border-bottom-right-radius: 22%;
   background: var(--white);
+}
+
+.form {
+  display: flex;
+  gap: 30px;
+}
+
+.divider {
+  height: 1px;
+  width: calc(100% - 90px);
+  background: var(--light-grey);
+  margin: 50px 0;
+}
+
+.dividerContainer {
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+@media screen and (max-width: 800px) {
+  .container {
+    width: 100%;
+  }
+
+  .divider {
+    width: 100%;
+  }
+
+  .dividerContainer {
+    margin: 30px 0 14px 0;
+  }
+}
+
+@media screen and (max-width: 630px) {
+  .container {
+    padding: 50px 30px;
+  }
+  .dividerContainer {
+    margin: 20px 0 0px 0;
+  }
+}
+
+@media screen and (max-width: 499px) {
+  .container {
+    padding: 46px 24px;
+  }
+
+  .form {
+    gap: 16px;
+  }
+  .dividerContainer {
+    margin: 26px 0 16px 0;
+  }
 }
