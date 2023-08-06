@@ -1,6 +1,6 @@
 import styles from './input.module.css';
 
-const Input = ({ label, placeholder, id, maxLength }) => {
+const Input = ({ label, placeholder, id, maxLength, value, onInputChange }) => {
   const handleKeyDown = (event) => {
     // Get the key code of the pressed key
     const keyCode = event.keyCode || event.which;
@@ -10,18 +10,27 @@ const Input = ({ label, placeholder, id, maxLength }) => {
       event.preventDefault();
     }
   };
+
+  const handleInputChange = (event) => {
+    const { value } = event.target;
+    onInputChange(id, value);
+  };
+
   return (
     <div className={styles.container}>
       <label className={styles.label} htmlFor={id}>
         {label.toUpperCase()}
       </label>
       <input
-        className={styles.input}
-        placeholder={placeholder}
-        id={id}
         type='text'
+        id={id}
+        name={id}
+        value={value}
+        placeholder={placeholder}
         maxLength={maxLength}
+        className={styles.input}
         onKeyDown={handleKeyDown}
+        onChange={handleInputChange}
       ></input>
     </div>
   );
