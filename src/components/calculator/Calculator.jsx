@@ -38,27 +38,31 @@ const Calculator = () => {
     }));
   };
 
-  console.log(inputValues);
-
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setInputValues({ day: '', month: '', year: '' });
+  };
   return (
     <div className={styles.container}>
-      <form className={styles.form}>
-        {inputs.map((input) => (
-          <Input
-            key={input.name}
-            label={input.name}
-            placeholder={input.placeholder}
-            id={input.name}
-            maxLength={input.maxLength}
-            value={inputValues[input.name]}
-            onInputChange={handleInputChange}
-          />
-        ))}
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <div className={styles.inputContainer}>
+          {inputs.map((input) => (
+            <Input
+              key={input.name}
+              label={input.name}
+              placeholder={input.placeholder}
+              id={input.name}
+              maxLength={input.maxLength}
+              value={inputValues[input.name]}
+              onInputChange={handleInputChange}
+            />
+          ))}
+        </div>
+        <div className={styles.dividerContainer}>
+          <div className={styles.divider}></div>
+          <Button />
+        </div>
       </form>
-      <div className={styles.dividerContainer}>
-        <div className={styles.divider}></div>
-        <Button />
-      </div>
       <div className={styles.textContainer}>
         {ddmmyy.map((item) => (
           <Date key={item} text={item} />
