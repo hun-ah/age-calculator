@@ -8,6 +8,10 @@
 }
 
 .form {
+  flex-direction: column;
+}
+
+.inputContainer {
   display: flex;
   gap: 30px;
 }
