@@ -1,7 +1,7 @@
 import styles from './calculator.module.css';
 import Input from '../input/Input';
 import Button from '../button/Button';
-import Date from '../date/Date';
+import Yymmdd from '../date/Date';
 import { useState } from 'react';
 
 const inputs = [
@@ -30,6 +30,12 @@ const Calculator = () => {
     month: '',
     year: '',
   });
+  const [numbers, setNumbers] = useState({
+    day: '',
+    month: '',
+    year: '',
+  });
+  const [inputErrors, setInputErrors] = useState({});
 
   const handleInputChange = (name, value) => {
     setInputValues((prevInputValues) => ({
@@ -38,10 +44,58 @@ const Calculator = () => {
     }));
   };
 
+  const calculateAge = (dateObj) => {
+    const day = parseInt(dateObj.day);
+    const month = parseInt(dateObj.month) - 1;
+    const year = parseInt(dateObj.year);
+
+    const inputDateObj = new Date(year, month, day);
+    const currentDate = new Date();
+
+    let years = currentDate.getFullYear() - inputDateObj.getFullYear();
+    let months = currentDate.getMonth() - inputDateObj.getMonth();
+    let days = currentDate.getDate() - inputDateObj.getDate();
+
+    if (days < 0) {
+      months--;
+      const lastMonthDate = new Date(
+        currentDate.getFullYear(),
+        currentDate.getMonth(),
+        0
+      );
+      days += lastMonthDate.getDate();
+    }
+
+    if (months < 0) {
+      years--;
+      months += 12;
+    }
+
+    setNumbers({
+      day: days,
+      month: months,
+      year: years,
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    setInputValues({ day: '', month: '', year: '' });
+
+    const newErrors = {};
+    // check for empty field
+    for (const input of inputs) {
+      if (!inputValues[input.name]) {
+        newErrors[input.name] = 'This field is required';
+      }
+    }
+    setInputErrors(newErrors);
+
+    if (Object.keys(newErrors).length === 0) {
+      setInputValues({ day: '', month: '', year: '' });
+      calculateAge(inputValues);
+    }
   };
+
   return (
     <div className={styles.container}>
       <form className={styles.form} onSubmit={handleSubmit}>
@@ -55,6 +109,7 @@ const Calculator = () => {
               maxLength={input.maxLength}
               value={inputValues[input.name]}
               onInputChange={handleInputChange}
+              error={inputErrors[input.name]}
             />
           ))}
         </div>
@@ -65,7 +120,7 @@ const Calculator = () => {
       </form>
       <div className={styles.textContainer}>
         {ddmmyy.map((item) => (
-          <Date key={item} text={item} />
+          <Yymmdd key={item} text={item} number={numbers[item.slice(0, -1)]} />
         ))}
       </div>
     </div>
