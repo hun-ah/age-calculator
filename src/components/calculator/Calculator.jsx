@@ -83,19 +83,12 @@ const Calculator = () => {
     const currentDate = new Date();
 
     const newErrors = {};
-    // check for empty field
-    for (const input of inputs) {
-      if (!inputValues[input.name]) {
-        newErrors[input.name] = 'This field is required';
-      }
-    }
-    setInputErrors(newErrors);
 
-    if (inputValues.day > 31) {
+    if (inputValues.day > 31 || inputValues.day < 1) {
       newErrors.day = 'Must be a valid day';
       setInputErrors(newErrors);
     }
-    if (inputValues.month > 12) {
+    if (inputValues.month > 12 || inputValues.month < 1) {
       newErrors.month = 'Must be a valid month';
       setInputErrors(newErrors);
     }
@@ -103,6 +96,18 @@ const Calculator = () => {
       newErrors.year = 'Must be in the past';
       setInputErrors(newErrors);
     }
+    if (inputValues.year.length < 4) {
+      newErrors.year = 'Must be 4 digits';
+      setInputErrors(newErrors);
+    }
+
+    // check for empty field
+    for (const input of inputs) {
+      if (!inputValues[input.name]) {
+        newErrors[input.name] = 'This field is required';
+      }
+    }
+    setInputErrors(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
       setInputValues({ day: '', month: '', year: '' });
