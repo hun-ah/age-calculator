@@ -80,6 +80,7 @@ const Calculator = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const currentDate = new Date();
 
     const newErrors = {};
     // check for empty field
@@ -89,6 +90,19 @@ const Calculator = () => {
       }
     }
     setInputErrors(newErrors);
+
+    if (inputValues.day > 31) {
+      newErrors.day = 'Must be a valid day';
+      setInputErrors(newErrors);
+    }
+    if (inputValues.month > 12) {
+      newErrors.month = 'Must be a valid month';
+      setInputErrors(newErrors);
+    }
+    if (inputValues.year > currentDate.getFullYear()) {
+      newErrors.year = 'Must be in the past';
+      setInputErrors(newErrors);
+    }
 
     if (Object.keys(newErrors).length === 0) {
       setInputValues({ day: '', month: '', year: '' });
