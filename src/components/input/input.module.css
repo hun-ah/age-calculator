@@ -36,6 +36,7 @@
   color: var(--red);
   font-style: italic;
   font-size: 12px;
+  max-width: 150px;
 }
 
 .errBorder {
