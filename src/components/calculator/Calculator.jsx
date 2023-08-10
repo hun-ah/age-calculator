@@ -81,23 +81,58 @@ const Calculator = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const currentDate = new Date();
-
     const newErrors = {};
+    const maxDaysPerMonth = {
+      1: 31, // January
+      2: 28, // February
+      3: 31, // March
+      4: 30, // April
+      5: 31, // May
+      6: 30, // June
+      7: 31, // July
+      8: 31, // August
+      9: 30, // September
+      10: 31, // October
+      11: 30, // November
+      12: 31, // December
+    };
+    const isValidDay =
+      inputValues.day >= 1 &&
+      inputValues.day <= maxDaysPerMonth[Number(inputValues.month)];
 
-    if (inputValues.day > 31 || inputValues.day < 1) {
-      newErrors.day = 'Must be a valid day';
+    if (
+      inputValues.year == currentDate.getFullYear() &&
+      inputValues.month == currentDate.getMonth() + 1 &&
+      inputValues.day > currentDate.getDate()
+    ) {
+      newErrors.day = 'Date must be current or in the past';
+      setInputErrors(newErrors);
+    }
+    if (inputValues.month > currentDate.getMonth() + 1) {
+      newErrors.month = 'Month must be current or in the past';
       setInputErrors(newErrors);
     }
     if (inputValues.month > 12 || inputValues.month < 1) {
       newErrors.month = 'Must be a valid month';
       setInputErrors(newErrors);
+    } else if (inputValues.month && !isValidDay) {
+      newErrors.day = `Day must be between 1 and ${
+        maxDaysPerMonth[Number(inputValues.month)]
+      } days`;
+      setInputErrors(newErrors);
     }
     if (inputValues.year > currentDate.getFullYear()) {
-      newErrors.year = 'Must be in the past';
+      newErrors.year = 'Year must be current or in the past';
+      newErrors.day = '';
+      newErrors.month = '';
       setInputErrors(newErrors);
     }
     if (inputValues.year.length < 4) {
       newErrors.year = 'Must be 4 digits';
+      setInputErrors(newErrors);
+    }
+    if (inputValues.day > 31 || inputValues.day < 1) {
+      newErrors.day = 'Must be a valid day';
       setInputErrors(newErrors);
     }
 
