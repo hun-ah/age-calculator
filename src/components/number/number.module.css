@@ -1,0 +1,18 @@
+.number {
+  color: var(--purple);
+  font-weight: 800;
+  font-style: italic;
+  font-size: 80px;
+}
+
+@media screen and (max-width: 630px) {
+  .number {
+    font-size: 60px;
+  }
+}
+
+@media screen and (max-width: 499px) {
+  .number {
+    font-size: 50px;
+  }
+}
