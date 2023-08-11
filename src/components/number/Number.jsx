@@ -17,7 +17,7 @@ const Number = ({ n, initialRender }) => {
         } else if (parseFloat(n) % 1 === 0) {
           return n.toFixed(0);
         } else {
-          return parseFloat(n).toFixed(0); // Customize decimal places as needed
+          return parseFloat(n).toFixed(0);
         }
       })}
     </animated.span>
