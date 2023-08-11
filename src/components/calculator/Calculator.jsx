@@ -36,6 +36,7 @@ const Calculator = () => {
     year: '',
   });
   const [inputErrors, setInputErrors] = useState({});
+  const [initialRender, setInitialRender] = useState(true);
 
   const handleInputChange = (name, value) => {
     setInputValues((prevInputValues) => ({
@@ -147,6 +148,7 @@ const Calculator = () => {
     if (Object.keys(newErrors).length === 0) {
       setInputValues({ day: '', month: '', year: '' });
       calculateAge(inputValues);
+      setInitialRender(false);
     }
   };
 
@@ -174,7 +176,12 @@ const Calculator = () => {
       </form>
       <div className={styles.textContainer}>
         {ddmmyy.map((item) => (
-          <Yymmdd key={item} text={item} number={numbers[item.slice(0, -1)]} />
+          <Yymmdd
+            key={item}
+            text={item}
+            number={numbers[item.slice(0, -1)]}
+            initialRender={initialRender}
+          />
         ))}
       </div>
     </div>
