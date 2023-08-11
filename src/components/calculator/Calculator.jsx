@@ -2,6 +2,7 @@ import styles from './calculator.module.css';
 import Input from '../input/Input';
 import Button from '../button/Button';
 import Yymmdd from '../date/Date';
+import Confetti from 'react-confetti';
 import { useState } from 'react';
 
 const inputs = [
@@ -37,6 +38,7 @@ const Calculator = () => {
   });
   const [inputErrors, setInputErrors] = useState({});
   const [initialRender, setInitialRender] = useState(true);
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
   const handleInputChange = (name, value) => {
     setInputValues((prevInputValues) => ({
@@ -149,6 +151,10 @@ const Calculator = () => {
       setInputValues({ day: '', month: '', year: '' });
       calculateAge(inputValues);
       setInitialRender(false);
+      setFormSubmitted(true);
+      setTimeout(() => {
+        setFormSubmitted(false);
+      }, 6000);
     }
   };
 
@@ -184,6 +190,10 @@ const Calculator = () => {
           />
         ))}
       </div>
+      {formSubmitted && (
+        // Show confetti when form is submitted
+        <Confetti width={window.innerWidth} height={window.innerHeight} />
+      )}
     </div>
   );
 };
