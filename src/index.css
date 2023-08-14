@@ -25,5 +25,10 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+}
+
+@media screen and (min-height: 670px) {
+  .container {
+    height: 100vh;
+  }
 }
