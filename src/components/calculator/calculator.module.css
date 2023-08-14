@@ -1,7 +1,7 @@
 .container {
   width: 770px;
   padding: 56px 50px;
-  margin: 50px;
+  margin: 0px 50px;
   border-radius: 20px;
   border-bottom-right-radius: 140px;
   background: var(--white);
