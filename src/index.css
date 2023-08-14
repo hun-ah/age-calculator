@@ -27,7 +27,7 @@ body {
   align-items: center;
 }
 
-@media screen and (min-height: 670px) {
+@media screen and (min-height: 666px) {
   .container {
     height: 100vh;
   }
